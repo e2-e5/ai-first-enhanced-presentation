@@ -53,4 +53,6 @@
 
 ---
 
-**Live Demo:** [Ссылка будет добавлена после публикации на GitHub Pages]
+**🌟 Live Demo:** https://e2-e5.github.io/ai-first-enhanced-presentation/
+
+**📂 GitHub Repository:** https://github.com/e2-e5/ai-first-enhanced-presentation
