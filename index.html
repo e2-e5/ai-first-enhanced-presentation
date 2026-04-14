@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.3/qrcode.min.js"></script>
   
   <style>
     :root {
@@ -576,13 +577,16 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
-      color: #333;
       position: relative;
       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       box-shadow: 0 8px 32px rgba(0,0,0,0.1);
       cursor: pointer;
       overflow: hidden;
+      padding: 20px;
+    }
+
+    #qrcode-canvas {
+      border-radius: 8px;
     }
 
     .qr-code::before {
@@ -909,13 +913,8 @@
       <div class="slide-content">
         <h2>Контакты</h2>
         <div class="qr-section">
-          <div class="qr-code">
-            <div style="text-align: center;">
-              <div style="font-size: 48px; margin-bottom: 8px;">📱</div>
-              <div style="font-weight: 600;">QR-код</div>
-              <div>Telegram</div>
-              <div style="color: var(--accent); font-weight: 600;">@Urlexx</div>
-            </div>
+          <div class="qr-code" id="qr-container">
+            <canvas id="qrcode-canvas"></canvas>
           </div>
           <div class="qr-info">
             <h3>Алексей Южанинов</h3>
@@ -1141,10 +1140,28 @@
       }, 50);
     });
 
+    // Generate QR Code
+    function generateQRCode() {
+      const canvas = document.getElementById('qrcode-canvas');
+      if (canvas) {
+        QRCode.toCanvas(canvas, 'https://t.me/Urlexx', {
+          width: 160,
+          height: 160,
+          margin: 2,
+          color: {
+            dark: '#07111f',
+            light: '#ffffff'
+          },
+          errorCorrectionLevel: 'M'
+        });
+      }
+    }
+
     // Initial animation
     document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         animateSlideContent(document.getElementById('slide-0'));
+        generateQRCode();
       }, 500);
     });
 

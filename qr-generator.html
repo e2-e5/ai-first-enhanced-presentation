@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Generator для AI First</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.3/qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: Inter, sans-serif;
+            background: #07111f;
+            color: #f3f7fb;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            background: rgba(13, 27, 47, 0.8);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            backdrop-filter: blur(12px);
+        }
+        
+        h1 {
+            color: #62e6ff;
+            margin-bottom: 30px;
+        }
+        
+        #qrcode {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            margin: 20px auto;
+            display: inline-block;
+        }
+        
+        .info {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(98, 230, 255, 0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(98, 230, 255, 0.2);
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #62e6ff, #8a7dff);
+            color: #07111f;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: transform 0.2s ease;
+        }
+        
+        .copy-btn:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>QR-код для Telegram</h1>
+        <div id="qrcode"></div>
+        <div class="info">
+            <p><strong>Телеграм:</strong> @Urlexx</p>
+            <p><strong>Ссылка:</strong> https://t.me/Urlexx</p>
+            <button class="copy-btn" onclick="copyLink()">Скопировать ссылку</button>
+        </div>
+    </div>
+
+    <script>
+        // Генерируем QR-код для Telegram
+        QRCode.toCanvas(document.getElementById('qrcode'), 'https://t.me/Urlexx', {
+            width: 200,
+            margin: 2,
+            color: {
+                dark: '#000000',
+                light: '#FFFFFF'
+            }
+        });
+        
+        function copyLink() {
+            navigator.clipboard.writeText('https://t.me/Urlexx').then(() => {
+                const btn = document.querySelector('.copy-btn');
+                const originalText = btn.textContent;
+                btn.textContent = 'Скопировано! ✓';
+                btn.style.background = '#7df0b8';
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = 'linear-gradient(135deg, #62e6ff, #8a7dff)';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
